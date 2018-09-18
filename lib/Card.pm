@@ -40,7 +40,7 @@ subtype 'CardSuit'
 
 subtype 'CardRank'
   => as 'Str'
-  => where { my $input = $_; any { $input eq $_ } keys %{$RANKS} }
+  => where { my $input = $_; any { $input eq $_ } keys %{$RANKS}; }
   => message { "'$_' is not a valid rank" };
 
 has 'suit' => ( is => 'ro', isa => 'CardSuit', required => 1 );
