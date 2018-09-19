@@ -29,7 +29,9 @@ sub color {
 
 sub full_name {
   my ($self) = @_;
-  return $PlayingCards::Constants::RANK_FULL_NAMES{$self->rank};
+  return $PlayingCards::Constants::RANK_FULL_NAMES{$self->rank}
+    . ' of '
+    . $PlayingCards::Constants::SUIT_FULL_NAMES{$self->suit};
 }
 
 no Moose;
