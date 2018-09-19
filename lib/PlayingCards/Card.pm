@@ -1,4 +1,4 @@
-package Card;
+package PlayingCards::Card;
 
 use Moose;
 use Moose::Util::TypeConstraints;
