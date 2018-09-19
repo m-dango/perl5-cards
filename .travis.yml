@@ -1,0 +1,13 @@
+sudo: false
+language: perl
+perl:
+  - '5.28'
+install:
+  - curl -sL --compressed https://git.io/cpm | perl - install -g
+      Carmel
+      Perl::Critic
+      Perl::Critic::Moose
+  - carmel install
+script:
+  - carmel exec 'prove --verbose --jobs 2'
+  - perlcritic lib t
