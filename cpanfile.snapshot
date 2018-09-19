@@ -728,6 +728,14 @@ DISTRIBUTIONS
     requirements:
       Module::Build::Tiny 0.035
       perl 5.005
+  Set-CrossProduct-2.003
+    pathname: B/BD/BDFOY/Set-CrossProduct-2.003.tar.gz
+    provides:
+      Set::CrossProduct 2.003
+    requirements:
+      ExtUtils::MakeMaker 6.64
+      File::Spec::Functions 0
+      perl 5.008
   Sub-Exporter-0.987
     pathname: R/RJ/RJBS/Sub-Exporter-0.987.tar.gz
     provides:
