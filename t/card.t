@@ -10,22 +10,15 @@ use Set::CrossProduct ();
 use FindBin qw($Bin);
 use lib "$Bin/../lib";
 use PlayingCards::Card ();
-
-Readonly::Array my @NUMBER_RANKS => 2..10;
-Readonly::Array my @FACE_RANKS   => qw(J Q K);
-Readonly::Array my @BLACK_SUITS  => qw(C S);
-Readonly::Array my @RED_SUITS    => qw(D H);
-
-Readonly::Array my @RANKS => @NUMBER_RANKS, @FACE_RANKS, 'A';
-Readonly::Array my @SUITS => @BLACK_SUITS, @RED_SUITS;
+use PlayingCards::Constants ();
 
 can_ok 'PlayingCards::Card', qw(new suit rank color full_name);
 
 subtest 'Create all cards' => sub {
   plan tests => 52;
   foreach my $params (@{Set::CrossProduct->new({
-    rank => \@RANKS,
-    suit => \@SUITS,
+    rank => \@PlayingCards::Constants::RANKS,
+    suit => \@PlayingCards::Constants::SUITS,
   })->combinations})
   {
     new_ok(
@@ -35,12 +28,15 @@ subtest 'Create all cards' => sub {
   }
 };
 
-foreach my $color_and_suits (['black', \@BLACK_SUITS], ['red', \@RED_SUITS]) {
+foreach my $color_and_suits (
+  ['black', \@PlayingCards::Constants::BLACK_SUITS],
+  ['red', \@PlayingCards::Constants::RED_SUITS]
+) {
   my ($color, $suits) = @{$color_and_suits};
   subtest "$color cards" => sub {
     plan tests => 26;
     foreach my $params (@{Set::CrossProduct->new({
-      rank => \@RANKS,
+      rank => \@PlayingCards::Constants::RANKS,
       suit => $suits,
     })->combinations})
     {
