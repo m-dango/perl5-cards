@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 5;
+use Test::More tests => 4;
 use Readonly ();
 use Set::CrossProduct ();
 
@@ -35,22 +35,22 @@ subtest 'Card full names' => sub {
   }
 };
 
-foreach my $color_and_suits (
-  ['black', \@BLACK_SUITS],
-  ['red', \@RED_SUITS]
-) {
-  my ($color, $suits) = @{$color_and_suits};
-  subtest "$color cards" => sub {
-    plan tests => 26;
-    foreach my $params (@{Set::CrossProduct->new({
+subtest 'Card colors' => sub {
+  plan tests => 52;
+  foreach my $color_and_suits (
+    ['black', \@BLACK_SUITS],
+    ['red', \@RED_SUITS]
+  ) {
+    my ($color, $suits) = @{$color_and_suits};
+    foreach my $args (@{Set::CrossProduct->new({
       rank => \@RANKS,
       suit => $suits,
     })->combinations})
     {
       is(
-        PlayingCards::Card->new($params)->color,
+        PlayingCards::Card->new($args)->color,
         $color,
-        sprintf '%s%s is %s', @{$params}{qw(rank suit)}, $color
+        sprintf '%s%s is %s', @{$args}{qw(rank suit)}, $color
       );
     }
   }
