@@ -3,18 +3,18 @@ package PlayingCards::Card;
 use Moose;
 use Moose::Util::TypeConstraints;
 use Readonly ();
-use List::MoreUtils qw(any zip);
+use List::MoreUtils qw(uniq any zip);
 use PlayingCards::Constants;
 use Carp qw(croak);
 
 subtype 'CardSuit'
   => as 'Str'
-  => where { my $input = $_; any { $input eq $_ } @SUITS, map {lc} @SUITS; }
+  => where { my $input = $_; any { $input eq $_ } uniq @SUITS, map {lc} @SUITS; }
   => message { "'$_' is not a valid suit" };
 
 subtype 'CardRank'
   => as 'Str'
-  => where { my $input = $_; any { $input eq $_ } @RANKS, map {lc} @RANKS, '10'; }
+  => where { my $input = $_; any { $input eq $_ } uniq @RANKS, map {lc} @RANKS, '10'; }
   => message { "'$_' is not a valid rank" };
 
 has 'suit' => ( is => 'ro', isa => 'CardSuit', required => 1 );
