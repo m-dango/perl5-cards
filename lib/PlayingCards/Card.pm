@@ -20,6 +20,14 @@ subtype 'CardRank'
 has 'suit' => ( is => 'ro', isa => 'CardSuit', required => 1 );
 has 'rank' => ( is => 'ro', isa => 'CardRank', required => 1 );
 
+sub BUILDARGS {
+  my ($class, %args) = @_;
+  if (defined $args{rank} && $args{rank} eq '10') {
+    $args{rank} = 'T';
+  }
+  return \%args;
+}
+
 sub color {
   my ($self) = @_;
   return 'red'   if any { $self->suit eq $_ } @RED_SUITS;
