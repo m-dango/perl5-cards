@@ -6,7 +6,7 @@ use warnings;
 use Test::More tests => 5;
 use Readonly ();
 use Set::CrossProduct ();
-use List::Util qw(all);
+use List::Util qw(all pairs);
 
 use FindBin qw($Bin);
 use lib "$Bin/../lib";
@@ -38,20 +38,16 @@ subtest 'Card full names' => sub {
 
 subtest 'Card colors' => sub {
   plan tests => 52;
-  foreach my $color_and_suits (
-    ['black', \@BLACK_SUITS],
-    ['red', \@RED_SUITS]
-  ) {
-    my ($color, $suits) = @{$color_and_suits};
+  foreach my $color_and_suits (pairs black => \@BLACK_SUITS, red => \@RED_SUITS) {
     foreach my $args (@{Set::CrossProduct->new({
       rank => \@RANKS,
-      suit => $suits,
+      suit => $color_and_suits->value,
     })->combinations})
     {
       is(
         PlayingCards::Card->new($args)->color,
-        $color,
-        sprintf '%s%s is %s', @{$args}{qw(rank suit)}, $color
+        $color_and_suits->key,
+        sprintf '%s%s is %s', @{$args}{qw(rank suit)}, $color_and_suits->key
       );
     }
   }
