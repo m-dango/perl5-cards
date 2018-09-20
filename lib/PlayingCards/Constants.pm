@@ -20,7 +20,7 @@ our @EXPORT = qw(
   @FULL_DECK_ARGS
 );
 
-Readonly::Array our @NUMBER_RANKS => 2..10;
+Readonly::Array our @NUMBER_RANKS => 2..9, 'T';
 Readonly::Array our @FACE_RANKS   => qw(J Q K);
 Readonly::Array our @BLACK_SUITS  => qw(C S);
 Readonly::Array our @RED_SUITS    => qw(D H);
