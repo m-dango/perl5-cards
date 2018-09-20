@@ -3,9 +3,22 @@ package PlayingCards::Constants;
 use strict;
 use warnings;
 
+use Exporter qw(import);
 use Readonly ();
 use List::MoreUtils qw(zip);
 use Set::CrossProduct ();
+
+our @EXPORT = qw(
+  @NUMBER_RANKS
+  @FACE_RANKS
+  @BLACK_SUITS
+  @RED_SUITS
+  @RANKS
+  @SUITS
+  %RANK_FULL_NAMES
+  %SUIT_FULL_NAMES
+  @FULL_DECK_ARGS
+);
 
 Readonly::Array our @NUMBER_RANKS => 2..10;
 Readonly::Array our @FACE_RANKS   => qw(J Q K);
