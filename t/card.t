@@ -29,7 +29,7 @@ subtest 'Card full names' => sub {
   foreach my $args (@PlayingCards::Constants::FULL_DECK_ARGS) {
     is(
       PlayingCards::Card->new($args)->full_name,
-      sprintf '%s of %s', $PlayingCards::Constants::RANK_FULL_NAMES{$args->{rank}}, $PlayingCards::Constants::SUIT_FULL_NAMES{$args->{suit}},
+      sprintf('%s of %s', $PlayingCards::Constants::RANK_FULL_NAMES{$args->{rank}}, $PlayingCards::Constants::SUIT_FULL_NAMES{$args->{suit}}),
       join q||, @{$args}{qw(rank suit)}
     );
   }
