@@ -6,7 +6,7 @@ use warnings;
 use Test::More tests => 5;
 use Readonly ();
 use Set::CrossProduct ();
-use List::Util qw(all pairs);
+use List::AllUtils qw(all pairs);
 
 use FindBin qw($Bin);
 use lib "$Bin/../lib";

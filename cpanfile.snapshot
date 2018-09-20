@@ -102,37 +102,52 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
-  Exporter-Tiny-1.002001
-    pathname: T/TO/TOBYINK/Exporter-Tiny-1.002001.tar.gz
+  List-AllUtils-0.14
+    pathname: D/DR/DROLSKY/List-AllUtils-0.14.tar.gz
     provides:
-      Exporter::Shiny 1.002001
-      Exporter::Tiny 1.002001
+      List::AllUtils 0.14
     requirements:
-      ExtUtils::MakeMaker 6.17
-      perl 5.006001
-  List-MoreUtils-0.428
-    pathname: R/RE/REHSACK/List-MoreUtils-0.428.tar.gz
-    provides:
-      List::MoreUtils 0.428
-      List::MoreUtils::PP 0.428
-    requirements:
-      Exporter::Tiny 0.038
+      Exporter 0
       ExtUtils::MakeMaker 0
-      List::MoreUtils::XS 0.426
-  List-MoreUtils-XS-0.428
-    pathname: R/RE/REHSACK/List-MoreUtils-XS-0.428.tar.gz
+      List::SomeUtils 0.50
+      List::Util 1.45
+      List::UtilsBy 0.10
+      base 0
+      strict 0
+      warnings 0
+  List-SomeUtils-0.56
+    pathname: D/DR/DROLSKY/List-SomeUtils-0.56.tar.gz
     provides:
-      List::MoreUtils::XS 0.428
+      List::SomeUtils 0.56
+      List::SomeUtils::PP 0.56
     requirements:
       Carp 0
+      Exporter 0
       ExtUtils::MakeMaker 0
-      File::Basename 0
-      File::Copy 0
-      File::Path 0
-      File::Spec 0
-      IPC::Cmd 0
-      XSLoader 0.22
-      base 0
+      List::SomeUtils::XS 0.54
+      List::Util 0
+      Module::Implementation 0
+      Text::ParseWords 0
+      perl 5.006
+      strict 0
+      vars 0
+      warnings 0
+  List-SomeUtils-XS-0.58
+    pathname: D/DR/DROLSKY/List-SomeUtils-XS-0.58.tar.gz
+    provides:
+      List::SomeUtils::XS 0.58
+    requirements:
+      ExtUtils::MakeMaker 0
+      XSLoader 0
+      strict 0
+      warnings 0
+  List-UtilsBy-0.11
+    pathname: P/PE/PEVANS/List-UtilsBy-0.11.tar.gz
+    provides:
+      List::UtilsBy 0.11
+    requirements:
+      Exporter 5.57
+      Module::Build 0.4004
   MRO-Compat-0.13
     pathname: H/HA/HAARG/MRO-Compat-0.13.tar.gz
     provides:

@@ -5,7 +5,7 @@ use warnings;
 
 use Exporter qw(import);
 use Readonly ();
-use List::MoreUtils qw(zip);
+use List::AllUtils qw(zip);
 use Set::CrossProduct ();
 
 our @EXPORT = qw(

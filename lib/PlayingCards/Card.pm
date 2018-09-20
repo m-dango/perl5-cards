@@ -3,7 +3,7 @@ package PlayingCards::Card;
 use Moose;
 use Moose::Util::TypeConstraints;
 use Readonly ();
-use List::MoreUtils qw(uniq any zip);
+use List::AllUtils qw(uniq any zip);
 use PlayingCards::Constants;
 use Carp qw(croak);
 
