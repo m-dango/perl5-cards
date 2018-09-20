@@ -9,12 +9,12 @@ use Carp qw(croak);
 
 subtype 'CardSuit'
   => as 'Str'
-  => where { my $input = $_; any { $input eq $_ } @SUITS; }
+  => where { my $input = $_; any { $input eq $_ } @SUITS, map {lc} @SUITS; }
   => message { "'$_' is not a valid suit" };
 
 subtype 'CardRank'
   => as 'Str'
-  => where { my $input = $_; any { $input eq $_ } @RANKS, '10'; }
+  => where { my $input = $_; any { $input eq $_ } @RANKS, map {lc} @RANKS, '10'; }
   => message { "'$_' is not a valid rank" };
 
 has 'suit' => ( is => 'ro', isa => 'CardSuit', required => 1 );
@@ -25,6 +25,11 @@ sub BUILD {
   if ($self->rank eq '10') {
     $self->{rank} = 'T';
   }
+
+  foreach my $key (qw(rank suit)) {
+    $self->{$key} = uc $self->$key;
+  }
+
   return;
 }
 
