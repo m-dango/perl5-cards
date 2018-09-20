@@ -5,6 +5,7 @@ use warnings;
 
 use Readonly ();
 use List::MoreUtils qw(zip);
+use Set::CrossProduct ();
 
 Readonly::Array our @NUMBER_RANKS => 2..10;
 Readonly::Array our @FACE_RANKS   => qw(J Q K);
@@ -20,5 +21,10 @@ Readonly::Hash  our %RANK_FULL_NAMES => zip @RANKS, @{[qw(
   jack queen king ace
 )]};
 Readonly::Hash  our %SUIT_FULL_NAMES => zip @SUITS, @{[qw(clubs spades diamonds hearts)]};
+
+Readonly::Array our @FULL_DECK_ARGS => Set::CrossProduct->new({
+  rank => \@RANKS,
+  suit => \@SUITS,
+})->combinations;
 
 1;

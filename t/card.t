@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More tests => 5;
 use Readonly ();
 use Set::CrossProduct ();
 
@@ -16,14 +16,21 @@ can_ok 'PlayingCards::Card', qw(new suit rank color full_name);
 
 subtest 'Create all cards' => sub {
   plan tests => 52;
-  foreach my $params (@{Set::CrossProduct->new({
-    rank => \@PlayingCards::Constants::RANKS,
-    suit => \@PlayingCards::Constants::SUITS,
-  })->combinations})
-  {
+  foreach my $args (@PlayingCards::Constants::FULL_DECK_ARGS) {
     new_ok(
-      'PlayingCards::Card' => [$params],
-      join q||, @{$params}{qw(rank suit)}
+      'PlayingCards::Card' => [$args],
+      join q||, @{$args}{qw(rank suit)}
+    );
+  }
+};
+
+subtest 'Card full names' => sub {
+  plan tests => 52;
+  foreach my $args (@PlayingCards::Constants::FULL_DECK_ARGS) {
+    is(
+      PlayingCards::Card->new($args)->full_name,
+      sprintf '%s of %s', $PlayingCards::Constants::RANK_FULL_NAMES{$args->{rank}}, $PlayingCards::Constants::SUIT_FULL_NAMES{$args->{suit}},
+      join q||, @{$args}{qw(rank suit)}
     );
   }
 };
