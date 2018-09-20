@@ -1,2 +1,2 @@
 severity = brutal
-exclude  = Modules::RequireEndWithOne CodeLayout::RequireTidyCode Modules::RequireVersionVar
+exclude  = Modules::RequireEndWithOne CodeLayout::RequireTidyCode Modules::RequireVersionVar Modules::ProhibitAutomaticExportation
