@@ -3,16 +3,17 @@
 use strict;
 use warnings;
 
-use Test::More tests => 4;
+use Test::More tests => 5;
 use Readonly ();
 use Set::CrossProduct ();
+use List::Util qw(all);
 
 use FindBin qw($Bin);
 use lib "$Bin/../lib";
 use PlayingCards::Card ();
 use PlayingCards::Constants;
 
-can_ok 'PlayingCards::Card', qw(new suit rank color full_name);
+can_ok 'PlayingCards::Card', qw(new suit rank color full_name is_face_card);
 
 subtest 'Create all cards' => sub {
   plan tests => 52;
@@ -54,4 +55,29 @@ subtest 'Card colors' => sub {
       );
     }
   }
-}
+};
+
+subtest 'Face cards' => sub {
+  plan tests => 52;
+  foreach my $args (@{Set::CrossProduct->new({
+    rank => \@FACE_RANKS,
+    suit => \@SUITS,
+  })->combinations})
+  {
+    cmp_ok(
+      PlayingCards::Card->new($args)->is_face_card, q(==), 1,
+      sprintf '%s%s is a face card', @{$args}{qw(rank suit)}
+    );
+  }
+
+  foreach my $args (@{Set::CrossProduct->new({
+    rank => [grep { my $rank = $_; all {$_ ne $rank} @FACE_RANKS; } @RANKS],
+    suit => \@SUITS,
+  })->combinations})
+  {
+    cmp_ok(
+      PlayingCards::Card->new($args)->is_face_card, q(==), 0,
+      sprintf '%s%s is not a face card', @{$args}{qw(rank suit)}
+    );
+  }
+};

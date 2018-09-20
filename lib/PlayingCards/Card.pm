@@ -33,6 +33,11 @@ sub full_name {
     . ' of ' . $SUIT_FULL_NAMES{$self->suit};
 }
 
+sub is_face_card {
+  my ($self) = @_;
+  return any { $_ eq $self->rank } @FACE_RANKS;
+}
+
 no Moose;
 no Moose::Util::TypeConstraints;
 __PACKAGE__->meta->make_immutable;
