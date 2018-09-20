@@ -14,18 +14,18 @@ subtype 'CardSuit'
 
 subtype 'CardRank'
   => as 'Str'
-  => where { my $input = $_; any { $input eq $_ } @RANKS; }
+  => where { my $input = $_; any { $input eq $_ } @RANKS, '10'; }
   => message { "'$_' is not a valid rank" };
 
 has 'suit' => ( is => 'ro', isa => 'CardSuit', required => 1 );
 has 'rank' => ( is => 'ro', isa => 'CardRank', required => 1 );
 
-sub BUILDARGS {
-  my ($class, %args) = @_;
-  if (defined $args{rank} && $args{rank} eq '10') {
-    $args{rank} = 'T';
+sub BUILD {
+  my ($self) = @_;
+  if ($self->rank eq '10') {
+    $self->{rank} = 'T';
   }
-  return \%args;
+  return;
 }
 
 sub color {
