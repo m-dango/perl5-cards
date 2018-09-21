@@ -17,17 +17,20 @@ subtype 'CardRank'
   => where { my $input = $_; any { $input eq $_ } uniq @RANKS, map {lc} @RANKS, '10'; }
   => message { "'$_' is not a valid rank" };
 
-has 'suit' => ( is => 'ro', isa => 'CardSuit', required => 1 );
-has 'rank' => ( is => 'ro', isa => 'CardRank', required => 1 );
+has 'suit' => ( is => 'ro', isa => 'CardSuit', required => 1, writer => '_set_suit' );
+has 'rank' => ( is => 'ro', isa => 'CardRank', required => 1, writer => '_set_rank' );
 
 sub BUILD {
   my ($self) = @_;
   if ($self->rank eq '10') {
-    $self->{rank} = 'T';
+    $self->_set_rank('T');
   }
 
   foreach my $key (qw(rank suit)) {
-    $self->{$key} = uc $self->$key;
+    my $set_method = "_set_$key";
+    if ($self->$key ne uc $self->$key) {
+      $self->$set_method(uc $self->$key);
+    }
   }
 
   return;
